@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/data_fragment"
+        android:title="Vase"
+        android:icon="@drawable/ic_oneleaflogo"
+        />
+    <item
+        android:id="@+id/account_fragment"
+        android:title="Account"
+        android:icon="@drawable/ic_accountleaf"
+        />
+    <item
+        android:id="@+id/settings_fragment"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        />
+</menu>
