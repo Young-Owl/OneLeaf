@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private val donutProgressView by lazy {findViewById<DonutProgressView>(R.id.light_donut)}
     private fun setupDonut() {
-        donutProgressView.cap = 5f
+        donutProgressView.cap = 100f
         donutProgressView.masterProgress = 0f
         donutProgressView.gapAngleDegrees = 0f
     }
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        setupDonut()
         // Bottom Nav Menu
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.fragment)
@@ -49,22 +49,48 @@ class MainActivity : AppCompatActivity() {
                 //View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         //}
 
+        var masterprogress = 40F
+        var amount1 = 0F
+        var amount2 = 0F
+        var amount3 = 0F
 
+
+        if(masterprogress <= 33F){
+            amount1 = masterprogress
+            amount2 = 0F
+            amount3 = 0F
+        }
+        else if(masterprogress in 33F..66F){
+            amount1 = 33F
+            amount2 = masterprogress - 33F
+            amount3 = 0F
+        }
+        else if(masterprogress in 66F..100F){
+            amount1 = 33F
+            amount2 = 33F
+            amount3 = 66F - masterprogress
+        }
 
         val section1 = DonutSection(
             name = "section_1",
             color = Color.parseColor("#FB1D32"),
-            amount = 1f
+            amount = amount1
         )
 
         val section2 = DonutSection(
             name = "section_2",
             color = Color.parseColor("#FFB98E"),
-            amount = 1f
+            amount = amount2
         )
 
-        donutProgressView.cap = 5f
-        donutProgressView.submitData(listOf(section1, section2))
+        val section3 = DonutSection(
+            name = "section_3",
+            color = Color.parseColor("#FFB98E"),
+            amount = amount3
+        )
+
+        donutProgressView.cap = 5F
+        donutProgressView.submitData(listOf(section1, section2, section3))
 
     }
 }
