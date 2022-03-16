@@ -1,21 +1,45 @@
 package com.ua.oneleaf
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.WindowManager
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
-
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
+    //codigo para o login
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        TextView username =(TextView) findViewById(R.id.username);
+        TextView password =(TextView) findViewById(R.id.password);
+
+        MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
+
+        //admin and admin
+
+        loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
+                    //correct
+                    Toast.makeText(MainActivity.this,"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
+                }else
+                //incorrect
+                    Toast.makeText(MainActivity.this,"LOGIN FAILED !!!",Toast.LENGTH_SHORT).show();
+            }
+// acaba aqui
+
+
+
+
 
     private val donutProgressView by lazy {findViewById<DonutProgressView>(R.id.light_donut)}
     private fun setupDonut() {
@@ -24,10 +48,25 @@ class MainActivity : AppCompatActivity() {
         donutProgressView.gapAngleDegrees = 0f
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupDonut()
+
+
+
+
+
+
+
+    }
+
+
+
+    setupDonut()
+
+
+
         // Bottom Nav Menu
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.fragment)
@@ -93,5 +132,7 @@ class MainActivity : AppCompatActivity() {
         donutProgressView.submitData(listOf(section1, section2, section3))
 
     }
+
+
 }
 
