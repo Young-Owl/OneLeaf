@@ -17,4 +17,9 @@
         android:id="@+id/settings_fragment"
         android:name="com.ua.oneleaf.settings_fragment"
         tools:layout="@layout/fragment_settings_fragment" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.ua.oneleaf.MainActivity"
+        android:label="login"
+        tools:layout="@layout/login" />
 </navigation>

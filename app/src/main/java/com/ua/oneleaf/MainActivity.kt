@@ -2,6 +2,7 @@ package com.ua.oneleaf
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -11,36 +12,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
-    //codigo para o login
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        TextView username =(TextView) findViewById(R.id.username);
-        TextView password =(TextView) findViewById(R.id.password);
-
-        MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
-
-        //admin and admin
-
-        loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
-                    //correct
-                    Toast.makeText(MainActivity.this,"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
-                }else
-                //incorrect
-                    Toast.makeText(MainActivity.this,"LOGIN FAILED !!!",Toast.LENGTH_SHORT).show();
-            }
-// acaba aqui
-
-
-
-
-
     private val donutProgressView by lazy {findViewById<DonutProgressView>(R.id.light_donut)}
     private fun setupDonut() {
         donutProgressView.cap = 100f
@@ -48,20 +19,32 @@ class MainActivity : AppCompatActivity() {
         donutProgressView.gapAngleDegrees = 0f
     }
 
+    lateinit var handler:DataBaseHelper //linha nova (H)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //codigo novo (H)
+        handler = DataBaseHelper(this)
 
+        showHome()
 
+        showRegistration.setOnClickListener{
+            showRegistration()
+        }
 
+        login.setOnClickListener{
+            showLogIn()
+        }
 
-
+        save.setOnCLickListener{
+            handler.insertUserData(name.text.toString())
+        }
 
     }
 
-
+// para aqui (H)
 
     setupDonut()
 
@@ -134,5 +117,25 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+// Registo e Login
+
+    private fun showRegistration(){
+        registration_layout.visibility= View.VISIBLE;
+        login_layout.visibility=View.GONE
+        home.visibility=View.GONE
 }
+
+    private fun showLogIn(){
+        registration_layout.visibility = View.GONE
+        login_layout.visibility = View.VISIBLE
+        home.visibility = View.GONE
+    }
+
+    private fun showHome(){
+        registration_layout.visibility = View.GONE
+        login_layout.visibility = View.GONE
+        home.visibility = View.VISIBLE
+    }
+
+
 
