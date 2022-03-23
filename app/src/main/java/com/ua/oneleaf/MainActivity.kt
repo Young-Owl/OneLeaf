@@ -9,7 +9,9 @@ import androidx.navigation.findNavController
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.button.MaterialButton
+import kotlinx.andriod.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.user_registration.*
+
 
 class MainActivity : AppCompatActivity() {
     private val donutProgressView by lazy {findViewById<DonutProgressView>(R.id.light_donut)}
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         donutProgressView.gapAngleDegrees = 0f
     }
 
-    lateinit var handler:DataBaseHelper //linha nova (H)
+    lateinit var handler: DataBaseHelper //linha nova (H)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         save.setOnCLickListener{
-            handler.insertUserData(name.text.toString())
+            handler.insertUserData(name = )
+            handler.
         }
 
     }

@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.provider.ContactsContract
+import android.service.autofill.UserData
 import java.security.AccessControlContext
 
 class DataBaseHelper(context: Context): SQLiteOpenHelper(context, dbname, factory, version) {
@@ -15,27 +17,30 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, dbname, factor
         TODO("Not yet implemented")
     }
 
-    fun insertUserData(name:String,email:String, password:String){
+    fun insertUserData(name: String, email: String, password: String){
         val db: SQLiteDatabase = writableDatabase
         val values: ContentValues = ContentValues()
-        values.put("name", name)
+        values.put("name",name)
         values.put("email",email)
-        values.put("passowrd", password)
+        values.put("passowrd",password)
 
         db.insert("user", null,values )
         db.close()
     }
 
 
-    fun userPresent(email: String, password: String): Boolean{
+    fun userPresent(email: String, password: String):Boolean{
         val db = writableDatabase
-        val query = "select * from user where emal = $email and password = $password"
+        val query = "select * from user where email = $email and password = $password"
         val cursor = db.rawQuery(query, null)
         if (cursor.count <= 0){
-            cursor.close()  //return false
+            cursor.close()
+            return false
         }
-        cursor.close() // return true
+        cursor.close()
+        return true
     }
+
 
 
     companion object{
