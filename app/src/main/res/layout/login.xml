@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/login">
 
 
     <TextView
@@ -55,14 +56,17 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/loginbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/loginbtn"
         android:layout_below="@id/password"
-        android:text="LOGIN"
-        android:backgroundTint="@color/design_default_color_primary"
         android:layout_centerHorizontal="true"
-        android:layout_margin = "10dp" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:text="LOGIN" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -89,7 +93,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/socialicons"
         android:layout_alignParentBottom="true"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal" />
 
     <ImageView
         android:layout_width="48dp"
