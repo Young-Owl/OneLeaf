@@ -2,18 +2,18 @@ package com.ua.oneleaf
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.andriod.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.user_registration.*
 
 
 class MainActivity : AppCompatActivity() {
-
     private val donutProgressView by lazy {findViewById<DonutProgressView>(R.id.light_donut)}
     private fun setupDonut() {
         donutProgressView.cap = 100f
@@ -42,77 +42,102 @@ class MainActivity : AppCompatActivity() {
 
         save.setOnCLickListener{
             handler.insertUserData(name = )
-            handler.
         }
 
     }
-    // Acaba Aqui
+
+// para aqui (H)
+
+    setupDonut()
 
 
-    // Bottom Nav Menu
-    val bottomNavigationView: BottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-    val navController = findNavController(R.id.fragment)
-    //val appBarConfiguration = AppBarConfiguration((setOf(R.id.info_fragment, R.id.account_fragment, R.id.settings_fragment)))
 
-    //setupActionBarWithNavController(navController, appBarConfiguration)
-    bottomNavigationView.setupWithNavController(navController)
+        // Bottom Nav Menu
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val navController = findNavController(R.id.fragment)
+        //val appBarConfiguration = AppBarConfiguration((setOf(R.id.info_fragment, R.id.account_fragment, R.id.settings_fragment)))
+
+        //setupActionBarWithNavController(navController, appBarConfiguration)
+        bottomNavigationView.setupWithNavController(navController)
 
 
-    // Fullscreen App (No Status bar)
-    //window.setFlags(
-    //WindowManager.LayoutParams.FLAG_FULLSCREEN,
-    //WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // Fullscreen App (No Status bar)
+        //window.setFlags(
+        //WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        //WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-    // Fullscreen App (No Status and Task bar)
+        // Fullscreen App (No Status and Task bar)
         //window.decorView.apply {
             // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher
             //systemUiVisibility =
                 //View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         //}
 
-    var masterprogress = 40F
-    var amount1 = 0F
-    var amount2 = 0F
-    var amount3 = 0F
+        var masterprogress = 40F
+        var amount1 = 0F
+        var amount2 = 0F
+        var amount3 = 0F
 
 
-    if(masterprogress <= 33F){
-        amount1 = masterprogress
-        amount2 = 0F
-        amount3 = 0F
+        if(masterprogress <= 33F){
+            amount1 = masterprogress
+            amount2 = 0F
+            amount3 = 0F
+        }
+        else if(masterprogress in 33F..66F){
+            amount1 = 33F
+            amount2 = masterprogress - 33F
+            amount3 = 0F
+        }
+        else if(masterprogress in 66F..100F){
+            amount1 = 33F
+            amount2 = 33F
+            amount3 = 66F - masterprogress
+        }
+
+        val section1 = DonutSection(
+            name = "section_1",
+            color = Color.parseColor("#FB1D32"),
+            amount = amount1
+        )
+
+        val section2 = DonutSection(
+            name = "section_2",
+            color = Color.parseColor("#FFB98E"),
+            amount = amount2
+        )
+
+        val section3 = DonutSection(
+            name = "section_3",
+            color = Color.parseColor("#FFB98E"),
+            amount = amount3
+        )
+
+        donutProgressView.cap = 5F
+        donutProgressView.submitData(listOf(section1, section2, section3))
+
     }
-    else if(masterprogress in 33F..66F){
-        amount1 = 33F
-        amount2 = masterprogress - 33F
-        amount3 = 0F
+
+
+// Registo e Login
+
+    private fun showRegistration(){
+        registration_layout.visibility= View.VISIBLE;
+        login_layout.visibility=View.GONE
+        home.visibility=View.GONE
+}
+
+    private fun showLogIn(){
+        registration_layout.visibility = View.GONE
+        login_layout.visibility = View.VISIBLE
+        home.visibility = View.GONE
     }
-    else if(masterprogress in 66F..100F){
-        amount1 = 33F
-        amount2 = 33F
-        amount3 = 66F - masterprogress
+
+    private fun showHome(){
+        registration_layout.visibility = View.GONE
+        login_layout.visibility = View.GONE
+        home.visibility = View.VISIBLE
     }
 
-    val section1 = DonutSection(
-        name = "section_1",
-        color = Color.parseColor("#FB1D32"),
-        amount = amount1
-    )
-
-    val section2 = DonutSection(
-        name = "section_2",
-        color = Color.parseColor("#FFB98E"),
-        amount = amount2
-    )
-
-    val section3 = DonutSection(
-        name = "section_3",
-        color = Color.parseColor("#FFB98E"),
-        amount = amount3
-    )
-
-    donutProgressView.cap = 5F
-    donutProgressView.submitData(listOf(section1, section2, section3))
-
-    }
 
 
