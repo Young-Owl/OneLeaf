@@ -41,7 +41,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         save.setOnCLickListener{
-            handler.insertUserData(name = )
+            handler.insertUserData(name.text.toString(), email.text.toString, password_register.text.toString())
+        }
+
+        login_button.setOnClickListener{
+            handler.userPresent()
         }
 
     }
