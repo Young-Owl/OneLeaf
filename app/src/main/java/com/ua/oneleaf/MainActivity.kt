@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //codigo novo (H)
+        //codigo novo (H)fsfsdf
         handler = DataBaseHelper(this)
 
         showHome()
