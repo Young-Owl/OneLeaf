@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         save.setOnClickListener {
             handler.insertUserData(name.text.toString(), email.text.toString(), password_register.text.toString())
-            showHome()
+            showData()
         }
 
         loginbtn.setOnClickListener {
@@ -67,6 +67,13 @@ class MainActivity : AppCompatActivity() {
         registration_layout.visibility = View.GONE
         login_layout.visibility = View.GONE
         home_ll.visibility = View.VISIBLE
+    }
+
+    private fun showData() {
+        registration_layout.visibility = View.GONE
+        login_layout.visibility = View.GONE
+        home_ll.visibility = View.GONE
+        data_layout.visibility = View.VISIBLE
     }
 }
 

@@ -40,6 +40,11 @@
         android:id="@+id/login_layout"
         layout="@layout/login"/>
 
+    <include
+        android:id="@+id/data_layout"
+        android:visibility="gone"
+        layout="@layout/fragment_data_fragment"/>
+
 </RelativeLayout>
 
 

@@ -22,7 +22,7 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, dbname, factor
         val values: ContentValues = ContentValues()
         values.put("name",name)
         values.put("email",email)
-        values.put("passowrd",password)
+        values.put("password",password)
 
         db.insert("user", null,values )
         db.close()
@@ -40,8 +40,6 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, dbname, factor
         cursor.close()
         return true
     }
-
-
 
     companion object{
         internal val dbname = "userDB"
