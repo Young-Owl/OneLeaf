@@ -1,17 +1,11 @@
 package com.ua.oneleaf
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import app.futured.donut.DonutProgressView
-import app.futured.donut.DonutSection
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.login
 import kotlinx.android.synthetic.main.login.*
@@ -38,9 +32,14 @@ class MainActivity : AppCompatActivity() {
 
         showHome()
 
+        registerfromlogin.setOnClickListener {
+            showRegistration()
+        }
+
         loginfromregister.setOnClickListener {
             showLogIn()
         }
+
         registration.setOnClickListener {
             showRegistration()
         }
