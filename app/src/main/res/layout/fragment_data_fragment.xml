@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333333"
+    android:background="@color/background_dark"
     android:theme="@style/Theme.OneLeaf"
     tools:context=".data_fragment">
 
@@ -12,65 +12,59 @@
         android:id="@+id/light_donut"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="224dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="232dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginBottom="101dp"
         app:donut_bgLineColor="@color/gray_light"
         app:donut_gapAngle="90"
         app:donut_gapWidth="60"
         app:donut_strokeWidth="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/light_donut3"
-        app:layout_constraintEnd_toStartOf="@+id/light_donut2"
+        app:layout_constraintEnd_toStartOf="@+id/water_donut"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <app.futured.donut.DonutProgressView
-        android:id="@+id/light_donut2"
+        android:id="@+id/water_donut"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="101dp"
+        android:layout_marginTop="232dp"
+        android:layout_marginEnd="30dp"
         app:donut_bgLineColor="@color/gray_light"
         app:donut_gapAngle="90"
         app:donut_gapWidth="60"
         app:donut_strokeWidth="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/light_donut4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/light_donut"
         app:layout_constraintTop_toTopOf="parent" />
 
     <app.futured.donut.DonutProgressView
-        android:id="@+id/light_donut3"
+        android:id="@+id/humidity_donut"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="34dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginBottom="108dp"
         app:donut_bgLineColor="@color/gray_light"
         app:donut_gapAngle="90"
         app:donut_gapWidth="100"
         app:donut_strokeWidth="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/light_donut4"
+        app:layout_constraintEnd_toStartOf="@+id/temperature_donut"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/light_donut" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <app.futured.donut.DonutProgressView
-        android:id="@+id/light_donut4"
+        android:id="@+id/temperature_donut"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="30dp"
         app:donut_bgLineColor="@color/gray_light"
         app:donut_gapAngle="90"
         app:donut_gapWidth="100"
         app:donut_strokeWidth="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/light_donut3"
-        app:layout_constraintTop_toBottomOf="@+id/light_donut2" />
+        app:layout_constraintStart_toEndOf="@+id/humidity_donut"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView2"
@@ -90,9 +84,9 @@
         android:text="Humidity"
         android:textAlignment="center"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/light_donut3"
-        app:layout_constraintEnd_toEndOf="@+id/light_donut3"
-        app:layout_constraintStart_toStartOf="@+id/light_donut3" />
+        app:layout_constraintBottom_toBottomOf="@+id/humidity_donut"
+        app:layout_constraintEnd_toEndOf="@+id/humidity_donut"
+        app:layout_constraintStart_toStartOf="@+id/humidity_donut" />
 
     <TextView
         android:id="@+id/textView5"
@@ -101,9 +95,9 @@
         android:text="Temperature"
         android:textAlignment="center"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/light_donut4"
-        app:layout_constraintEnd_toEndOf="@+id/light_donut4"
-        app:layout_constraintStart_toStartOf="@+id/light_donut4" />
+        app:layout_constraintBottom_toBottomOf="@+id/temperature_donut"
+        app:layout_constraintEnd_toEndOf="@+id/temperature_donut"
+        app:layout_constraintStart_toStartOf="@+id/temperature_donut" />
 
     <TextView
         android:id="@+id/textView3"
@@ -112,39 +106,86 @@
         android:text="Water"
         android:textAlignment="center"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/light_donut2"
-        app:layout_constraintEnd_toEndOf="@+id/light_donut2"
-        app:layout_constraintStart_toStartOf="@+id/light_donut2" />
+        app:layout_constraintBottom_toBottomOf="@+id/water_donut"
+        app:layout_constraintEnd_toEndOf="@+id/water_donut"
+        app:layout_constraintStart_toStartOf="@+id/water_donut" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/account_usb"
         android:layout_width="88dp"
         android:layout_height="124dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="52dp"
         android:background="#00FFFFFF"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_leaficon"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#FFFFFF" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/plant_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:fontFamily="casual"
+        android:layout_marginTop="2dp"
+        android:fontFamily="sans-serif-light"
         android:text="Rose"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/account_usb" />
+
+    <TextView
+        android:id="@+id/light_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="L%"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/light_donut"
+        app:layout_constraintEnd_toEndOf="@+id/light_donut"
+        app:layout_constraintStart_toStartOf="@+id/light_donut"
+        app:layout_constraintTop_toTopOf="@+id/light_donut" />
+
+    <TextView
+        android:id="@+id/water_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="W%"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/water_donut"
+        app:layout_constraintEnd_toEndOf="@+id/water_donut"
+        app:layout_constraintStart_toStartOf="@+id/water_donut"
+        app:layout_constraintTop_toTopOf="@+id/water_donut" />
+
+    <TextView
+        android:id="@+id/humidity_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="H%"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/humidity_donut"
+        app:layout_constraintEnd_toEndOf="@+id/humidity_donut"
+        app:layout_constraintStart_toStartOf="@+id/humidity_donut"
+        app:layout_constraintTop_toTopOf="@+id/humidity_donut" />
+
+    <TextView
+        android:id="@+id/temperature_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T%"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/temperature_donut"
+        app:layout_constraintEnd_toEndOf="@+id/temperature_donut"
+        app:layout_constraintStart_toStartOf="@+id/temperature_donut"
+        app:layout_constraintTop_toTopOf="@+id/temperature_donut" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

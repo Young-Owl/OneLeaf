@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_main.login
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.user_registration.*
 
-
 class MainActivity : AppCompatActivity() {
 
     lateinit var handler: DataBaseHelper //linha nova (H)
@@ -38,15 +37,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         save.setOnClickListener {
-            handler.insertUserData(name.text.toString(), email.text.toString(), password_register.text.toString())
+            //handler.insertUserData(name.text.toString(), email.text.toString(), password_register.text.toString())
             showData()
         }
 
         loginbtn.setOnClickListener {
-            if (handler.userPresent(login.text.toString(), password.text.toString()))
+            if (handler.userPresent(login.text.toString(), password.text.toString())) {
                 Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
-            else
+            }
+            else {
                 Toast.makeText(this, "Username or password is incorrect", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
@@ -55,26 +56,31 @@ class MainActivity : AppCompatActivity() {
         registration_layout.visibility = View.VISIBLE;
         login_layout.visibility = View.GONE
         home_ll.visibility = View.GONE
+        data_layout.visibility = View.GONE
     }
 
     private fun showLogIn() {
         registration_layout.visibility = View.GONE
         login_layout.visibility = View.VISIBLE
         home_ll.visibility = View.GONE
+        data_layout.visibility = View.GONE
     }
 
     private fun showHome() {
         registration_layout.visibility = View.GONE
         login_layout.visibility = View.GONE
         home_ll.visibility = View.VISIBLE
+        data_layout.visibility = View.GONE
     }
 
+    // Código Novo (G)
     private fun showData() {
         registration_layout.visibility = View.GONE
         login_layout.visibility = View.GONE
         home_ll.visibility = View.GONE
         data_layout.visibility = View.VISIBLE
     }
+    // Acaba Aqui
 }
 
 

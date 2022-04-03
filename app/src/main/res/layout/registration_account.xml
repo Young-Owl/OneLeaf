@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#333333"
     android:theme="@style/Theme.OneLeaf"
+    tools:context=".MainActivity"
+    android:id="@+id/h"
+    android:layout_centerInParent="true"
+    android:gravity="center"
+    android:orientation="horizontal">
     >
 
     <Button
-        android:id="@+id/registration"
+        android:id="@+id/registrationa"
         android:layout_width="380dp"
         android:layout_height="50dp"
         android:backgroundTint="#00FFFFFF"
+        android:fontFamily="sans-serif-light"
         android:shadowColor="#00FFFFFF"
         android:shadowDx="0"
         android:shadowDy="0"
@@ -21,16 +28,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/logina"
         app:layout_constraintVertical_bias="0.075"
         app:strokeColor="#498C19"
-        app:strokeWidth="3" />
+        app:strokeWidth="3dp" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/logina"
         android:layout_width="380dp"
         android:layout_height="50dp"
         android:backgroundTint="#498C19"
+        android:fontFamily="sans-serif-light"
         android:text="LogIn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +53,7 @@
         android:layout_height="222dp"
         android:layout_marginTop="112dp"
         android:foregroundTint="#FFFFFF"
-        android:tint="#FFFFFF"
+        app:tint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
