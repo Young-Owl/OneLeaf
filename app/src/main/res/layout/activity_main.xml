@@ -97,6 +97,20 @@
             app:layout_constraintTop_toBottomOf="@+id/textView7"
             app:layout_constraintVertical_bias="0.0" />
 
+        <Button
+            android:id="@+id/testData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="@color/green_altered"
+            android:fontFamily="sans-serif-thin"
+            android:text="DataTest"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registration" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

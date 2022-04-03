@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_dark"
     android:theme="@style/Theme.OneLeaf"
-    tools:context=".data_fragment">
+    tools:context=".DataActivity">
 
     <app.futured.donut.DonutProgressView
         android:id="@+id/light_donut"

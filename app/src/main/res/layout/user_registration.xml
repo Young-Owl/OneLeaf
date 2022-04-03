@@ -20,6 +20,14 @@
 
 
 
+
+
+
+
+
+
+
+
     ]]>
 
     <EditText
@@ -34,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
         android:id="@+id/email"
@@ -67,38 +75,77 @@
 
     <Button
         android:id="@+id/save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="324dp"
+        android:layout_height="51dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="#498C19"
-        android:text="Save"
+        android:text="Register"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_register" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="196dp"
-        android:layout_height="199dp"
-        android:layout_marginTop="125dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_accountleaf" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="81dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Create your new account"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="35dp" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="59dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="18dp"
-        android:tint="@color/background_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        android:id="@+id/imageView4"
+        android:layout_width="88dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_oneleaflogo" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_oneleaf" />
+
+    <TextView
+        android:id="@+id/loginfromregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="84dp"
+        android:clickable="true"
+        android:text="Have an account?"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.346"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="Login In"
+        android:textAllCaps="false"
+        android:textColor="@color/green_altered"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toEndOf="@+id/loginfromregister"
+        tools:layout_editor_absoluteY="743dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
