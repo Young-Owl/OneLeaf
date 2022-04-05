@@ -13,5 +13,9 @@
     <color name="green_altered">#59AF1B</color>
     <color name="green_light">#25B568</color>
     <color name="green_dark">#FFC107</color>
+    <color name="battery1">#FF0000</color>
+    <color name="battery2">#F1721D</color>
+    <color name="battery3">#FFDD32</color>
+    <color name="battery4">#94E81E</color>
     <color name="background_dark">#121212</color>
 </resources>
