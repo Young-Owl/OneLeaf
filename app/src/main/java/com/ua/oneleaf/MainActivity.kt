@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.login
+import kotlinx.android.synthetic.main.activity_main.logout
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.user_registration.*
 import com.ua.oneleaf.DataActivity as DataActivity
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             showRegistration()
         }
 
-        login.setOnClickListener {
+        logout.setOnClickListener {
             showLogIn()
         }
 
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         loginbtn.setOnClickListener {
-            if (handler.userPresent(login.text.toString(), password.text.toString())) {
+            if (handler.userPresent(logout.text.toString(), password.text.toString())) {
                 Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
             }
             else {

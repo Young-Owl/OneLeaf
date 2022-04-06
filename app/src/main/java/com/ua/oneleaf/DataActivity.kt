@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
@@ -45,7 +46,7 @@ class DataActivity : AppCompatActivity() {
     private val temperatureText by lazy {findViewById<TextView>(R.id.temperature_percentage)}
     // Ends here
 
-    private var batteryPercentage: Float = 0.0F
+    private var batteryPercentage: Float = 100.0F
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,9 +72,9 @@ class DataActivity : AppCompatActivity() {
         setupTemperatureDonut(temperatureProgress)
         runInitialAnimation()
 
-
-
+        updateBattery(batteryPercentage)
         time()
+        refreshApp()
     }
 
     private fun time() {
@@ -230,6 +231,30 @@ class DataActivity : AppCompatActivity() {
                 battery4.setColorFilter(resources.getColor(R.color.battery4), android.graphics.PorterDuff.Mode.SRC_IN)
                 batteryWarning.visibility = View.GONE
             }
+        }
+    }
+    private fun refreshApp() {
+        refresh.setOnRefreshListener {
+            // Start
+            batteryPercentage = 9F
+            updateBattery(batteryPercentage)
+            // Setup Light Donut
+            lightProgress = 10F
+            setupLightDonut(lightProgress)
+            // Setup Water Donut
+            waterProgress = 10F
+            setupWaterDonut(waterProgress)
+            // Setup Humidity Donut
+            humidityProgress = 10F
+            setupHumidityDonut(humidityProgress)
+            // Setup Temperature Donut
+            temperatureProgress = 10F
+            setupTemperatureDonut(temperatureProgress)
+            // End
+
+            Toast.makeText(this, "Page Refreshed!", Toast.LENGTH_SHORT).show()
+            refresh.isRefreshing = false
+
         }
     }
 }
