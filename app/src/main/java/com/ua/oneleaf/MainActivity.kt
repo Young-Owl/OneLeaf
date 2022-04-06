@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         login_layout.visibility = View.GONE
         home_ll.visibility = View.GONE
     }
-
+//
     private fun showLogIn() {
         registration_layout.visibility = View.GONE
         login_layout.visibility = View.VISIBLE
