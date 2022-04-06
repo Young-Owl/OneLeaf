@@ -1,20 +1,16 @@
 package com.ua.oneleaf
 
-import android.graphics.Color
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import app.futured.donut.DonutProgressView
-import app.futured.donut.DonutSection
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.login
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.user_registration.*
-
+import com.ua.oneleaf.DataActivity as DataActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,10 +20,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Codigo Novo(G)
+        val testButtonData = findViewById<Button>(R.id.testData)
+        testButtonData.setOnClickListener{
+            showData()
+        }
+        //
+
         //codigo novo (H)
         handler = DataBaseHelper(this)
 
         showHome()
+
+        registerfromlogin.setOnClickListener {
+            showRegistration()
+        }
+
+        loginfromregister.setOnClickListener {
+            showLogIn()
+        }
 
         registration.setOnClickListener {
             showRegistration()
@@ -43,10 +54,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         loginbtn.setOnClickListener {
-            if (handler.userPresent(login.text.toString(), password.text.toString()))
+            if (handler.userPresent(login.text.toString(), password.text.toString())) {
                 Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
-            else
+            }
+            else {
                 Toast.makeText(this, "Username or password is incorrect", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        testData.setOnClickListener {
+            showData()
         }
 
     }
@@ -55,19 +72,31 @@ class MainActivity : AppCompatActivity() {
         registration_layout.visibility = View.VISIBLE;
         login_layout.visibility = View.GONE
         home_ll.visibility = View.GONE
+        data_layout.visibility = View.GONE
     }
 //
     private fun showLogIn() {
         registration_layout.visibility = View.GONE
         login_layout.visibility = View.VISIBLE
         home_ll.visibility = View.GONE
+        data_layout.visibility = View.GONE
     }
 
     private fun showHome() {
         registration_layout.visibility = View.GONE
         login_layout.visibility = View.GONE
         home_ll.visibility = View.VISIBLE
+        data_layout.visibility = View.GONE
     }
+
+    // Código Novo (G)
+    private fun showData() {
+        val intent = Intent(
+            this, DataActivity::class.java
+        )
+        startActivity(intent)
+    }
+    // Acaba Aqui
 }
 
 

@@ -12,7 +12,9 @@ android {
         }
         buildFeatures{
             viewBinding = true;
+            dataBinding = true;
         }
+        viewBinding.enabled = true
     }
 
 
