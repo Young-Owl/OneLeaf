@@ -19,7 +19,7 @@
 
 
         <Button
-            android:id="@+id/registration"
+            android:id="@+id/registerHomeBtn"
             android:layout_width="331dp"
             android:layout_height="45dp"
             android:backgroundTint="#00FFFFFF"
@@ -32,14 +32,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logout"
+            app:layout_constraintTop_toBottomOf="@+id/loginHomeBtn"
             app:layout_constraintVertical_bias="0.0"
             app:strokeColor="#498C19"
             app:strokeWidth="3dp" />
 
 
         <Button
-            android:id="@+id/logout"
+            android:id="@+id/loginHomeBtn"
             android:layout_width="331dp"
             android:layout_height="45dp"
             android:backgroundTint="#498C19"
@@ -109,7 +109,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registration" />
+            app:layout_constraintTop_toBottomOf="@+id/registerHomeBtn" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

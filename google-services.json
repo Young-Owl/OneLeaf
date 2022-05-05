@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1075640306494",
+    "firebase_url": "https://oneleaf-eb74c-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "oneleaf-eb74c",
+    "storage_bucket": "oneleaf-eb74c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075640306494:android:b6384055b216e328077a6f",
+        "android_client_info": {
+          "package_name": "com.ua.oneleaf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075640306494-n9i3f85u6dfqoo3esrhhmt578qdbqn7r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ua.oneleaf",
+            "certificate_hash": "cde3ab6a0597c181188aff9d58f7df9cdb15876c"
+          }
+        },
+        {
+          "client_id": "1075640306494-6fjhg7b7lj1qobmt2crakakkpqud1h03.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAem4TQX1JCOXirah-EKRoUBjimEWLxyME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1075640306494-6fjhg7b7lj1qobmt2crakakkpqud1h03.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

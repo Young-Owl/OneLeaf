@@ -39,7 +39,7 @@
         app:strokeColor="#000000" />
 
     <Button
-        android:id="@+id/logout"
+        android:id="@+id/loginHomeBtn"
         android:layout_width="250dp"
         android:layout_height="90dp"
         android:layout_marginBottom="280dp"

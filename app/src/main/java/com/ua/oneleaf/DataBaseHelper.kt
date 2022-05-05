@@ -17,10 +17,9 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, dbname, factor
         TODO("Not yet implemented")
     }
 
-    fun insertUserData(name: String, email: String, password: String){
+    fun insertUserData(email: String, password: String){
         val db: SQLiteDatabase = writableDatabase
         val values: ContentValues = ContentValues()
-        values.put("name",name)
         values.put("email",email)
         values.put("password",password)
 

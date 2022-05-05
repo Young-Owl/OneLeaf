@@ -11,19 +11,19 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <ListView
-            android:id = "@+id/listview"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
 
-        </ListView>
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"></ListView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <app.futured.donut.DonutProgressView
         android:id="@+id/light_donut"
         android:layout_width="0dp"
@@ -309,6 +309,22 @@
         app:layout_constraintStart_toEndOf="@+id/imageView11"
         app:layout_constraintTop_toTopOf="@+id/imageView11"
         app:srcCompat="@drawable/ic_baseline_warning_24" />
+
+    <Button
+        android:id="@+id/graphButton"
+        android:layout_width="122dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@color/green_altered"
+        android:fontFamily="sans-serif-light"
+        android:text="Graphs"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/humidity_percentage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
