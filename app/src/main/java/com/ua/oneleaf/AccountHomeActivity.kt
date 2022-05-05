@@ -2,18 +2,13 @@ package com.ua.oneleaf
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.os.Bundle
-import android.widget.Button
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.loginHomeBtn
-import com.ua.oneleaf.DataActivity as DataActivity
+import android.os.Bundle
+import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.account_home.*
 
-class MainActivity : AppCompatActivity() {
+class AccountHomeActivity : AppCompatActivity() {
     //Progress Dialog
     private lateinit var progressDialog: ProgressDialog
     private lateinit var auth: FirebaseAuth;
@@ -21,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.account_home)
 
         //Configure progress dialog
         progressDialog = ProgressDialog(this)
@@ -33,32 +28,16 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         checkUser()
 
-        val testButtonData = findViewById<Button>(R.id.testData)
-        testButtonData.setOnClickListener{
+        //DataDonuts
+        databtn.setOnClickListener {
             showData()
         }
 
-        loginHomeBtn.setOnClickListener{
-            showLogin()
+        //Logout
+        logoutbtn.setOnClickListener {
+            auth.signOut()
+            checkUser()
         }
-
-        registerHomeBtn.setOnClickListener {
-            showRegister()
-        }
-    }
-
-    private fun showLogin() {
-        val intent = Intent(
-            this, LoginActivity::class.java
-        )
-        startActivity(intent)
-    }
-
-    private fun showRegister() {
-        val intent = Intent(
-            this, RegisterActivity::class.java
-        )
-        startActivity(intent)
     }
 
     private fun showData() {
@@ -67,20 +46,32 @@ class MainActivity : AppCompatActivity() {
         )
         startActivity(intent)
     }
+
+    private fun showHome() {
+        val intent = Intent(
+            this, MainActivity::class.java
+        )
+        startActivity(intent)
+    }
+
     private fun checkUser() {
         // If user is already logged in go to profile activity
         // Get current user
         val firebaseUser = auth.currentUser
         val intent = Intent(
-            this, AccountHomeActivity::class.java
+            this, MainActivity::class.java
         )
         if (firebaseUser != null) {
-        //User is already logged in
-        startActivity(intent)
-        finish()
+            //User is already logged in
+            val emailInf = firebaseUser.email
+            val tv1: TextView = findViewById(R.id.loggedmail)
+            tv1.text = emailInf
+        }
+        else{
+            startActivity(intent)
+            finish()
         }
     }
+
+
 }
-
-
-

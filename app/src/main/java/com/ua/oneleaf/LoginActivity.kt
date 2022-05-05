@@ -1,5 +1,6 @@
 package com.ua.oneleaf
 
+import android.accounts.Account
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -19,30 +20,27 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.user_registration.*
 
 class LoginActivity : AppCompatActivity() {
+    //Progress Dialog
 
     private lateinit var auth: FirebaseAuth;
     private val ref = FirebaseAuth.getInstance()
 
+    //ProgressDialog
+    private lateinit var progressDialog: ProgressDialog
+
+
     private var emailVal = ""
     private var passwordVal = ""
-
-    //private val email = findViewById<EditText>(R.id.username)
-    //private val password = findViewById<EditText>(R.id.password)
-    //private val loginBtn = findViewById<Button>(R.id.loginbtn)
-
-    //Progress Dialog
-    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
 
-        //Configure progress dialog
+        // configure progress dialog
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Please wait")
-        progressDialog.setMessage("Logging In...")
+        progressDialog.setMessage("Login In...")
         progressDialog.setCanceledOnTouchOutside(false)
-        //checkUser()
 
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -53,16 +51,6 @@ class LoginActivity : AppCompatActivity() {
             validateData()
         }
 
-        //loginBtn.setOnClickListener {
-            //ref.createUserWithEmailAndPassword(
-                //email.text.toString().trim(),
-                //password.text.toString().trim()
-            //)
-            //showData()
-        //}
-
-
-
         registerfromlogin.setOnClickListener {
             showRegister()
         }
@@ -72,13 +60,6 @@ class LoginActivity : AppCompatActivity() {
     private fun showRegister() {
         val intent = Intent(
             this, RegisterActivity::class.java
-        )
-        startActivity(intent)
-    }
-
-    private fun showData() {
-        val intent = Intent(
-            this, DataActivity::class.java
         )
         startActivity(intent)
     }
@@ -111,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
                 val firebaseUser = auth.currentUser
                 val email = firebaseUser!!.email
                 Toast.makeText(this,"Logged In as $email", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this,DataActivity::class.java))
+                startActivity(Intent(this,AccountHomeActivity::class.java))
                 finish()
             }
             .addOnFailureListener{ e->
@@ -121,18 +102,4 @@ class LoginActivity : AppCompatActivity() {
             }
 
     }
-
-    //private fun checkUser() {
-        // If user is already logged in go to profile activity
-        // Get current user
-        //val firebaseUser = auth.currentUser
-        //val intent = Intent(
-            //this, DataActivity::class.java
-        //)
-        //if (firebaseUser != null) {
-            //User is already logged in
-            //startActivity(intent)
-            //finish()
-        //}
-    //}
 }

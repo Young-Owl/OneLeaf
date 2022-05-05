@@ -9,11 +9,10 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
-import kotlinx.android.synthetic.main.fragment_data_fragment.*
+import kotlinx.android.synthetic.main.data_donuts.*
 import kotlin.random.Random
 
 class DataActivity : AppCompatActivity() {
@@ -50,7 +49,7 @@ class DataActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_data_fragment)
+        setContentView(R.layout.data_donuts)
 
         // Code goes here
         setupDonut()

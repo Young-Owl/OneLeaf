@@ -8,15 +8,15 @@
     <fragment
         android:id="@+id/data_fragment"
         android:name="com.ua.oneleaf.data_fragment"
-        tools:layout="@layout/fragment_data_fragment" />
+        tools:layout="@layout/data_donuts" />
     <fragment
         android:id="@+id/account_fragment"
         android:name="com.ua.oneleaf.account_fragment"
-        tools:layout="@layout/fragment_account_fragment" />
+        tools:layout="@layout/account_home" />
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.ua.oneleaf.settings_fragment"
-        tools:layout="@layout/fragment_settings_fragment" />
+        tools:layout="@layout/settings" />
     <activity
         android:id="@+id/mainActivity"
         android:name="com.ua.oneleaf.MainActivity"

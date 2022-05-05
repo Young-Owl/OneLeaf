@@ -127,7 +127,7 @@
     <include
         android:id="@+id/data_layout"
         android:visibility="gone"
-        layout="@layout/fragment_data_fragment"/>
+        layout="@layout/data_donuts"/>
 
 </RelativeLayout>
 

@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import app.futured.donut.DonutProgressView
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,7 +36,7 @@ class account_fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account_fragment, container, false)
+        return inflater.inflate(R.layout.account_home, container, false)
     }
 
     companion object {

@@ -7,6 +7,7 @@ plugins {
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk 32
@@ -58,6 +59,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation("app.futured.donut:donut:2.2.1")
     //implementation("app.futured.donut:donut-compose:$version")
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation platform('com.google.firebase:firebase-bom:29.2.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'

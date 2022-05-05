@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import app.futured.donut.DonutProgressView
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,7 +36,7 @@ class data_fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_data_fragment, container, false)
+        return inflater.inflate(R.layout.data_donuts, container, false)
     }
 
 
