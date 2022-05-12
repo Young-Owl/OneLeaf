@@ -1,0 +1,8 @@
+<root>
+    <item
+        name='com.google.firebase.database.ValueEventListener void onCancelled(com.google.firebase.database.DatabaseError)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true" />
+        </annotation>
+    </item>
+</root>
