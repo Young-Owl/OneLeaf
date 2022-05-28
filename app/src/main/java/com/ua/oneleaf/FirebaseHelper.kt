@@ -1,6 +1,8 @@
 package com.ua.oneleaf
 
 import android.os.Bundle
+import android.renderscript.Sampler
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -10,8 +12,17 @@ import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+
+
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Text
+
+
+
 
 
 class FirebaseHelper : AppCompatActivity() {
@@ -39,3 +50,20 @@ class FirebaseHelper : AppCompatActivity() {
     }
 
 }
+
+// Read from the database(deve faltar aqui uma ver) voltar a isto !! ((H))
+myRef.addValueEventListener(object : Sampler.Value { override fun onDataChange(dataSnapshot: DataSnapshot){
+        //This metod is called once with the intial value and again
+        //whenever data at this location is updated
+    val value = dataSnapshot.getValue<String>()
+    Log.d(TAG, "Value is: $value")
+}
+    override fun onCancelled(error: DatabaseError){
+            //failed to read value
+        Log.w(TAG, "Failed to read value", error.toException())
+    }
+})
+
+
+
+
