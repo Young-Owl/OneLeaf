@@ -1,14 +1,17 @@
 package com.ua.oneleaf
 
 import android.app.ProgressDialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import com.firebase.ui.auth.data.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.account_home.*
@@ -86,8 +89,8 @@ class AccountHomeActivity : AppCompatActivity() {
 
     }
 
-    private fun getUserData(){
-        val user = Firebase.auth.currentUser
+    /* private fun getUserData(){
+        /*val user = Firebase.auth.currentUser
         user?.let {
             // Name, email address, and profile photo Url
             val name = user.displayName
@@ -101,7 +104,23 @@ class AccountHomeActivity : AppCompatActivity() {
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getToken() instead.
             val uid = user.uid
-        }
+        }*/
+        databaseReference.child(uid).addValueEventListener(object: ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                user = snapshot.getValue(User::class.java)!!
+                val tv1: TextView = findViewById(R.id.loggedmail)
+                tv1.setText(user.username)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+
+        })
     }
+*/
 
 }

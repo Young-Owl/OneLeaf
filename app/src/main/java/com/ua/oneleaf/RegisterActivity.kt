@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Button
@@ -24,15 +25,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth;
     private lateinit var databaseReference: DatabaseReference
     private lateinit var storageReference: StorageReference
-    private lateinit var imageUri: Uri
     private val ref = FirebaseAuth.getInstance()
-
+    private var filePath: Uri? = null
 
     //ProgressDialog
     private lateinit var progressDialog: ProgressDialog
@@ -42,7 +44,7 @@ class RegisterActivity : AppCompatActivity() {
     private var passwordRVal = ""
 
     companion object{
-        val IMAGE_REQUEST_CODE = 100
+        const val IMAGE_REQUEST_CODE = 100
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,14 +67,6 @@ class RegisterActivity : AppCompatActivity() {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
-        val user = com.ua.oneleaf.User(usernameRVal,emailRVal)
-        if (uid != null) {
-            databaseReference.child(uid).setValue(user).addOnCompleteListener{
-                if(it.isSuccessful){
-                    uploadProfilePic()
-                }
-            }
-        }
         profile_image_up.setOnClickListener{
             pickImageGallery()
         }
@@ -128,7 +122,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun firebaseSignUp() {
-        val uid = auth.currentUser?.uid
         //show progress
         progressDialog.show()
         //create account
@@ -139,6 +132,24 @@ class RegisterActivity : AppCompatActivity() {
                 //Get current user
                 val firebaseUser = auth.currentUser
                 val email = firebaseUser!!.email
+                val uid = auth.currentUser?.uid
+
+
+
+                val user = User(usernameRVal,emailRVal)
+                if (uid != null) {
+                    databaseReference.child(uid).setValue(user).addOnCompleteListener{
+                        if(it.isSuccessful){
+                            uploadProfilePic()
+                        }
+                        else{
+                            Toast.makeText(this, "Failed to Upload PFP", Toast.LENGTH_SHORT).show()
+                            progressDialog.dismiss()
+                        }
+                    }
+                }
+
+
 
                 Toast.makeText(this, "Account created with email $email", Toast.LENGTH_SHORT).show()
                 //open profile
@@ -153,12 +164,15 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun uploadProfilePic() {
-        imageUri = Uri.parse("android.resources://$packageName/${R.drawable.ic_baseline_face}")
-        storageReference = FirebaseStorage.getInstance().getReference("User/"+auth.currentUser?.uid)
-        storageReference.putFile(imageUri).addOnSuccessListener {
-            Toast.makeText(this@RegisterActivity, "Profile Pic Updated", Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener{
-            Toast.makeText(this@RegisterActivity, "Profile Pic Failed", Toast.LENGTH_SHORT).show()
+        if(filePath != null){
+            storageReference = FirebaseStorage.getInstance().getReference("User/"+auth.currentUser?.uid)
+            storageReference.putFile(filePath!!).addOnSuccessListener {
+                Toast.makeText(this@RegisterActivity, "Profile Pic Updated", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener{
+                Toast.makeText(this@RegisterActivity, "Profile Pic Failed", Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            Toast.makeText(this, "Please Upload an Image", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -168,36 +182,21 @@ class RegisterActivity : AppCompatActivity() {
         startActivityForResult(intent, IMAGE_REQUEST_CODE)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK){
-            profile_image_up.setImageURI(data?.data)
-        }
-    }
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+            if(data == null || data.data == null){
+                return
+            }
 
-    // Not working
-    private fun updateProfile(){
-        auth.currentUser?.let { user->
-            val username = user_register.text.toString()
-            val photoURl = Uri.parse("android.resource://$packageName/${R.drawable.ic_baseline_face}")
-            val profileUpdates = UserProfileChangeRequest.Builder()
-                .setDisplayName(username)
-                .setPhotoUri(photoURl)
-                .build()
-
-            CoroutineScope(Dispatchers.IO).launch {
-                try{
-                    // user.updateProfile(profileUpdates).await()
-                    withContext(Dispatchers.Main){
-                        Toast.makeText(this@RegisterActivity,"Successfully updated Profile",Toast.LENGTH_LONG).show()                   }
-                }catch(e:Exception){
-                    withContext(Dispatchers.Main){
-                        Toast.makeText(this@RegisterActivity,e.message,Toast.LENGTH_LONG).show()
-                    }
-                }
-
+            filePath = data.data
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+                profile_image_up.setImageBitmap(bitmap)
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
         }
     }
-
 }
+

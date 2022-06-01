@@ -51,18 +51,19 @@ class FirebaseHelper : AppCompatActivity() {
 
 }
 
-// Read from the database(deve faltar aqui uma ver) voltar a isto !! ((H))
+/*// Read from the database(deve faltar aqui uma ver) voltar a isto !! ((H))
 myRef.addValueEventListener(object : Sampler.Value { override fun onDataChange(dataSnapshot: DataSnapshot){
-        //This metod is called once with the intial value and again
-        //whenever data at this location is updated
+    //This metod is called once with the intial value and again
+    //whenever data at this location is updated
     val value = dataSnapshot.getValue<String>()
     Log.d(TAG, "Value is: $value")
 }
     override fun onCancelled(error: DatabaseError){
-            //failed to read value
+        //failed to read value
         Log.w(TAG, "Failed to read value", error.toException())
     }
 })
+*/
 
 
 
