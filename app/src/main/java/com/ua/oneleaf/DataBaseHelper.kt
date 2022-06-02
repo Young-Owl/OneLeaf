@@ -6,7 +6,9 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.ContactsContract
 import android.service.autofill.UserData
+import com.google.firebase.database.DataSnapshot
 import java.security.AccessControlContext
+import java.util.function.DoubleBinaryOperator
 
 class DataBaseHelper(context: Context): SQLiteOpenHelper(context, dbname, factory, version) {
     override fun onCreate(p0: SQLiteDatabase?) {
@@ -45,4 +47,32 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, dbname, factor
         internal val factory = null
         internal val version = 1
     }
+
+   //******************************************************
+    class Medidas (snapshot: DataSnapshot) {
+        lateinit var vase: String
+        lateinit var numb_vase: String
+        lateinit var Battery: String
+        lateinit var Humidity: String
+        lateinit var Level: String
+        lateinit var Light: String
+        lateinit var Temperature: String
+
+        init {
+            try {
+                val data: HashMap<String, Any> = snapshot.value as HashMap<String, Any>
+                vase = snapshot.key ?: ""
+                numb_vase = data["1"] as String
+                Battery = data["Battery"] as String
+                Humidity = data["Humidity"] as String
+                Level = data["Level"] as String
+                Light = data["light"] as String
+                Temperature = data["Temperature"] as String
+            } catch(e: Exception){
+                e.printStackTrace()
+            }
+        }
+   }
+
+
 }
