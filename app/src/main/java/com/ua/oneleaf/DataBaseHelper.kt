@@ -49,30 +49,29 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, dbname, factor
     }
 
    //******************************************************
-    class Medidas (snapshot: DataSnapshot) {
-        lateinit var vase: String
-        lateinit var numb_vase: String
-        lateinit var Battery: String
-        lateinit var Humidity: String
-        lateinit var Level: String
-        lateinit var Light: String
-        lateinit var Temperature: String
+    //class Medidas (snapshot: DataSnapshot) {
+    //    lateinit var vase: String
+     //   lateinit var numb_vase: String
+     //   lateinit var Battery: String
+     //   lateinit var Humidity: String
+     //   lateinit var Level: String
+     //   lateinit var Light: String
+     //   lateinit var Temperature: String
 
-        init {
-            try {
-                val data: HashMap<String, Any> = snapshot.value as HashMap<String, Any>
-                vase = snapshot.key ?: ""
-                numb_vase = data["1"] as String
-                Battery = data["Battery"] as String
-                Humidity = data["Humidity"] as String
-                Level = data["Level"] as String
-                Light = data["light"] as String
-                Temperature = data["Temperature"] as String
-            } catch(e: Exception){
-                e.printStackTrace()
-            }
-        }
-   }
-
+      //  init {
+      //      try {
+      //          val data: HashMap<String, Any> = snapshot.value as HashMap<String, Any>
+      //          vase = snapshot.key ?: ""
+      //          numb_vase = data["1"] as String
+      //          Battery = data["Battery"] as String
+       //         Humidity = data["Humidity"] as String
+        //        Level = data["Level"] as String
+        //        Light = data["light"] as String
+         //       Temperature = data["Temperature"] as String
+         //   } catch(e: Exception){
+         //       e.printStackTrace()
+        //    }
+      //  }
+  // }
 
 }
