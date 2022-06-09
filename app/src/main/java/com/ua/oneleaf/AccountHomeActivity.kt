@@ -3,18 +3,20 @@ package com.ua.oneleaf
 import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
-import com.firebase.ui.auth.data.model.User
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.account_home.*
+import kotlinx.android.synthetic.main.account_home.refreshAccount
+import kotlinx.android.synthetic.main.data_donuts.*
+import java.io.File
 
 class AccountHomeActivity : AppCompatActivity() {
     //Progress Dialog
@@ -23,7 +25,7 @@ class AccountHomeActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth;
     private lateinit var storageReference: StorageReference
     private lateinit var binding : AccountHomeActivity
-    private lateinit var user: User
+    private lateinit var user: com.ua.oneleaf.User
     private lateinit var databaseReference: DatabaseReference
     private lateinit var uid: String
     private val ref = FirebaseAuth.getInstance()
@@ -32,20 +34,37 @@ class AccountHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.account_home)
 
+
         //Configure progress dialog
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Please wait")
-        progressDialog.setMessage("Logging In...")
+        progressDialog.setMessage("Getting Data...")
         progressDialog.setCanceledOnTouchOutside(false)
 
         auth = FirebaseAuth.getInstance()
+
+        uid = auth.currentUser?.uid.toString()
+
+        progressDialog.show()
         checkUser()
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
+        getUserData()
+        getProfilePic()
+
+
         //DataDonuts
         databtn.setOnClickListener {
             showData()
+        }
+        //Add Vase
+        vasebtn.setOnClickListener{
+            showVases()
+        }
+
+        profile_image.setOnClickListener{
+           showUpdatePFP()
         }
 
         //Logout
@@ -53,6 +72,7 @@ class AccountHomeActivity : AppCompatActivity() {
             auth.signOut()
             checkUser()
         }
+        refreshApp()
     }
 
     private fun showData() {
@@ -62,14 +82,22 @@ class AccountHomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun showHome() {
+    private fun showUpdatePFP() {
         val intent = Intent(
-            this, MainActivity::class.java
+            this, ProfileUpdate::class.java
+        )
+        startActivity(intent)
+    }
+
+    private fun showVases() {
+        val intent = Intent(
+            this, VaseRegister::class.java
         )
         startActivity(intent)
     }
 
     private fun checkUser() {
+        progressDialog.show()
         // If user is already logged in go to profile activity
         // Get current user
         val firebaseUser = auth.currentUser
@@ -89,30 +117,15 @@ class AccountHomeActivity : AppCompatActivity() {
 
     }
 
-    /* private fun getUserData(){
-        /*val user = Firebase.auth.currentUser
-        user?.let {
-            // Name, email address, and profile photo Url
-            val name = user.displayName
-            val email = user.email
-            val photoUrl = user.photoUrl
-
-            // Check if user's email is verified
-            val emailVerified = user.isEmailVerified
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            val uid = user.uid
-        }*/
-        databaseReference.child(uid).addValueEventListener(object: ValueEventListener {
+    private fun getUserData(){
+        progressDialog.show()
+        databaseReference.addValueEventListener(object: ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                user = snapshot.getValue(User::class.java)!!
-                val tv1: TextView = findViewById(R.id.loggedmail)
-                tv1.setText(user.username)
+                user = snapshot.child("$uid/Data").getValue(com.ua.oneleaf.User::class.java)!!
+                loggedmail.text = user.username
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -121,6 +134,34 @@ class AccountHomeActivity : AppCompatActivity() {
 
         })
     }
-*/
 
+    private fun getProfilePic(){
+        storageReference = FirebaseStorage.getInstance().reference.child("Users/$uid"+".png")
+        val localFile = File.createTempFile("tempImage", "jpg")
+        storageReference.getFile(localFile).addOnSuccessListener {
+            val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+            profile_image.setImageBitmap(bitmap)
+            progressDialog.dismiss()
+
+        }.addOnFailureListener{
+            Toast.makeText(this, "Failed to retrieve PFP", Toast.LENGTH_SHORT).show()
+            progressDialog.dismiss()
+        }
+        progressDialog.dismiss()
+    }
+
+    private fun refreshApp() {
+        progressDialog.show()
+        refreshAccount.setOnRefreshListener {
+            // Start
+
+            getUserData()
+            getProfilePic()
+            // End
+
+            Toast.makeText(this, "Page Refreshed!", Toast.LENGTH_SHORT).show()
+            refreshAccount.isRefreshing = false
+            progressDialog.dismiss()
+        }
+    }
 }

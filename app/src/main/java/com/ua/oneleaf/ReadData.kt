@@ -1,6 +1,6 @@
 //Objeto criado por (H) a seguir o toturial... How to Retrieve Data from Firebase database (Foxandroid)
 
-
+/*
 
 
 package com.ua.oneleaf
@@ -11,18 +11,23 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil.inflate
 import com.google.firebase.database.*
+import com.ua.oneleaf.databinding.AccountHomeBinding.inflate
+import com.ua.oneleaf.databinding.LoginBinding.inflate
+import com.ua.oneleaf.databinding.UserRegistrationBinding.inflate
+import com.ua.oneleaf.databinding.DataDonutsBinding.inflate
 import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
 
 class ReadData  :   AppCompatActivity(){
-    private lateinit var binding : ActivityReadDataBinding
+    private lateinit var binding : DataActivity
     private lateinit var database : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        binding = ActivityReadDataBinding.inflate(LayoutInflater)
+        binding = DataActivity.inflate(LayoutInflater)
         setContentView(binding.root)
 
         binding.readdatBtn.setOnClickListener {             //função para clicar no botão para ir buscar a info
@@ -72,3 +77,4 @@ class ReadData  :   AppCompatActivity(){
 
 
 }
+*/

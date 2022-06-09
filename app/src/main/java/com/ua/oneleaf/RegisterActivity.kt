@@ -9,11 +9,9 @@ import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Button
 import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -21,12 +19,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.user_registration.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.IOException
-import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -35,6 +28,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var storageReference: StorageReference
     private val ref = FirebaseAuth.getInstance()
     private var filePath: Uri? = null
+    private lateinit var uid: String
 
     //ProgressDialog
     private lateinit var progressDialog: ProgressDialog
@@ -60,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // Initialize Firebase Auth
         auth = Firebase.auth
-        val uid = auth.currentUser?.uid
+        uid = auth.currentUser?.uid.toString()
         val emailR = findViewById<TextInputEditText>(R.id.email_register)
         val passwordR = findViewById<TextInputEditText>(R.id.password_register)
         val registerB = findViewById<Button>(R.id.save)
@@ -135,10 +129,10 @@ class RegisterActivity : AppCompatActivity() {
                 val uid = auth.currentUser?.uid
 
 
-
-                val user = User(usernameRVal,emailRVal)
+                val vases = "0"
+                val user = User(usernameRVal,emailRVal,vases)
                 if (uid != null) {
-                    databaseReference.child(uid).setValue(user).addOnCompleteListener{
+                    databaseReference.child("$uid/Data").setValue(user).addOnCompleteListener{
                         if(it.isSuccessful){
                             uploadProfilePic()
                         }
@@ -165,7 +159,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun uploadProfilePic() {
         if(filePath != null){
-            storageReference = FirebaseStorage.getInstance().getReference("User/"+auth.currentUser?.uid)
+            storageReference = FirebaseStorage.getInstance().getReference("Users/"+auth.currentUser?.uid+".png")
             storageReference.putFile(filePath!!).addOnSuccessListener {
                 Toast.makeText(this@RegisterActivity, "Profile Pic Updated", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener{

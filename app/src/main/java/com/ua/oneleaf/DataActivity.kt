@@ -2,6 +2,7 @@ package com.ua.oneleaf
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -12,10 +13,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
+import com.firebase.ui.auth.data.model.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.data_donuts.*
 import kotlin.random.Random
 
 class DataActivity : AppCompatActivity() {
+
+    private lateinit var progressDialog: ProgressDialog
+    private lateinit var auth: FirebaseAuth;
+    private lateinit var storageReference: StorageReference
+    private lateinit var binding : AccountHomeActivity
+    private lateinit var user: User
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var uid: String
+    private val ref = FirebaseAuth.getInstance()
 
     // Load each Donut from layout, along with respective functions
     private val donutLight by lazy {findViewById<DonutProgressView>(R.id.light_donut)}
@@ -51,6 +65,17 @@ class DataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.data_donuts)
 
+        graphButton.setOnClickListener {
+
+            val Vaso : String = plant_name.text.toString()
+            if(Vaso.isNotEmpty()){
+                //readData(Vaso)
+
+            }else{
+                Toast.makeText(this, "Please enter the Vase name", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         // Code goes here
         setupDonut()
 
@@ -75,6 +100,36 @@ class DataActivity : AppCompatActivity() {
         time()
         refreshApp()
     }
+
+    /*private fun readData(Vaso: String){
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Measures")
+        databaseReference.child(Vaso).get().addOnSuccessListener {
+        if(it.exists()){
+
+            val battery = it.child("Battery").value
+            val humidity = it.child("Humidity").value
+            val level = it.child("Level").value
+            val light = it.child("Light").value
+            val temperature = it.child("Temperature").value
+            Toast.makeText(this, "Sucessfuly Read", Toast.LENGTH_SHORT).show()
+            binding.etVaso.text.clear()
+            binding.tvBattery.text = battery.toString()
+            binding.tvHumidity.text = humidity.toString()
+            binding.tvLevel.text = level.toString()
+            binding.tvLight.text = light.toString()
+            binding.tvTemperature.text = temperature.toString()
+
+        }else{
+            Toast.makeText(this, "Vase doesn´t exist", Toast.LENGTH_SHORT).show()
+        }
+        }.addOnFailureListener{
+        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+
+        }
+    }*/
+
+
 
     private fun time() {
         val handler = Handler()

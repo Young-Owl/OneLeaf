@@ -1,3 +1,5 @@
 package com.ua.oneleaf
 
-data class User(var username : String ?= null, var email : String?= null)
+import com.google.firebase.database.Exclude
+
+data class User(var username : String ?= null, var email : String?= null, var vases : String?= null)
