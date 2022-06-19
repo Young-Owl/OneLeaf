@@ -3,9 +3,11 @@ package com.ua.oneleaf
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.ContentValues
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -15,21 +17,26 @@ import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
 import com.firebase.ui.auth.data.model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.account_home.*
 import kotlinx.android.synthetic.main.data_donuts.*
+import kotlinx.coroutines.delay
+import kotlin.properties.Delegates
 import kotlin.random.Random
 
 class DataActivity : AppCompatActivity() {
 
     private lateinit var progressDialog: ProgressDialog
     private lateinit var auth: FirebaseAuth;
-    private lateinit var storageReference: StorageReference
-    private lateinit var binding : AccountHomeActivity
-    private lateinit var user: User
     private lateinit var databaseReference: DatabaseReference
     private lateinit var uid: String
-    private val ref = FirebaseAuth.getInstance()
+
+    private lateinit var vaseID: String
+    private lateinit var light: String
+
 
     // Load each Donut from layout, along with respective functions
     private val donutLight by lazy {findViewById<DonutProgressView>(R.id.light_donut)}
@@ -59,45 +66,50 @@ class DataActivity : AppCompatActivity() {
     private val temperatureText by lazy {findViewById<TextView>(R.id.temperature_percentage)}
     // Ends here
 
+    private lateinit var data: VaseData
     private var batteryPercentage: Float = 100.0F
+
+    // Variable to see if it is the first time loading
+    private var firstTimeBoot : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.data_donuts)
 
-        graphButton.setOnClickListener {
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Please wait")
+        progressDialog.setMessage("Updating...")
+        progressDialog.setCanceledOnTouchOutside(false)
+        //init firebase auth
+        auth = FirebaseAuth.getInstance()
 
-            val Vaso : String = plant_name.text.toString()
+        // Initialize Firebase Auth
+        uid = auth.currentUser?.uid.toString()
+
+        val bundle : Bundle?= intent.extras
+        val vaseName = bundle!!.getString("vaseName")
+        vaseID = bundle.getString("ID").toString()
+        id_vase.text = vaseName
+        /*graphButton.setOnClickListener {
+
+            val Vaso : String = id_vase.text.toString()
             if(Vaso.isNotEmpty()){
                 //readData(Vaso)
 
             }else{
                 Toast.makeText(this, "Please enter the Vase name", Toast.LENGTH_SHORT).show()
             }
-        }
+        }*/
 
         // Code goes here
         setupDonut()
 
-        // Setup Light Donut
-        lightProgress = 32F
-        setupLightDonut(lightProgress)
-
-        // Setup Water Donut
-        waterProgress = 66F
-        setupWaterDonut(waterProgress)
-
-        // Setup Humidity Donut
-        humidityProgress = 80F
-        setupHumidityDonut(humidityProgress)
-
-        // Setup Temperature Donut
-        temperatureProgress = 40F
-        setupTemperatureDonut(temperatureProgress)
-        runInitialAnimation()
-
+        databaseReference = FirebaseDatabase.getInstance().getReference("Measures")
+        getVaseData()
+        progressDialog.dismiss()
+        updateAllDonuts(lightProgress,waterProgress,humidityProgress,temperatureProgress)
         updateBattery(batteryPercentage)
-        time()
+        //time()
         refreshApp()
     }
 
@@ -151,6 +163,48 @@ class DataActivity : AppCompatActivity() {
                 handler.postDelayed(this, delay.toLong())
             }
         }, delay.toLong())
+    }
+
+    private fun getVaseData(){
+        progressDialog.show()
+        databaseReference.addValueEventListener(object: ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                data = snapshot.child(vaseID).getValue(VaseData::class.java)!!
+                lightProgress = data.light!!
+                waterProgress = data.water!!
+                temperatureProgress = data.temperature!!
+                humidityProgress = data.humidity!!
+                batteryPercentage = data.battery!!
+
+                if(firstTimeBoot == 0){
+                    setupLightDonut(lightProgress)
+                    setupHumidityDonut(humidityProgress)
+                    setupTemperatureDonut(temperatureProgress)
+                    setupWaterDonut(waterProgress)
+                    runInitialAnimation()
+
+                    updateBattery(batteryPercentage)
+                    firstTimeBoot = 1
+                }
+                else if(firstTimeBoot == 1){
+                    setupLightDonut(lightProgress)
+                    setupHumidityDonut(humidityProgress)
+                    setupTemperatureDonut(temperatureProgress)
+                    setupWaterDonut(waterProgress)
+                    updateBattery(batteryPercentage)
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(ContentValues.TAG, "Failed to read values.", error.toException())
+            }
+
+        })
+        progressDialog.dismiss()
     }
 
     private fun setupDonut() {
@@ -289,6 +343,7 @@ class DataActivity : AppCompatActivity() {
     }
     private fun refreshApp() {
         refresh.setOnRefreshListener {
+            /*
             // Start
             batteryPercentage = 9F
             updateBattery(batteryPercentage)
@@ -305,6 +360,14 @@ class DataActivity : AppCompatActivity() {
             temperatureProgress = 10F
             setupTemperatureDonut(temperatureProgress)
             // End
+            */
+            getVaseData()
+            setupLightDonut(lightProgress)
+            setupWaterDonut(waterProgress)
+            setupHumidityDonut(humidityProgress)
+            setupTemperatureDonut(temperatureProgress)
+            updateBattery(batteryPercentage)
+            runInitialAnimation()
 
             Toast.makeText(this, "Page Refreshed!", Toast.LENGTH_SHORT).show()
             refresh.isRefreshing = false

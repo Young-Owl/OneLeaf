@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OneLeaf">
         <activity
+            android:name=".VaseSelect"
+            android:exported="false" />
+        <activity
             android:name=".ProfileUpdate"
             android:exported="false" />
         <activity

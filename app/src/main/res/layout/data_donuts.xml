@@ -21,7 +21,10 @@
         <ListView
             android:id="@+id/listview"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"></ListView>
+            android:layout_height="match_parent">
+
+
+        </ListView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <app.futured.donut.DonutProgressView
@@ -193,10 +196,9 @@
         app:tint="#FFFFFF" />
 
     <TextView
-        android:id="@+id/plant_name"
+        android:id="@+id/id_vase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
         android:fontFamily="sans-serif-light"
         android:text="Rose"
         android:textAlignment="center"
@@ -221,10 +223,11 @@
 
     <TextView
         android:id="@+id/water_percentage"
-        android:layout_width="33dp"
-        android:layout_height="22dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="W%"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/water_donut"

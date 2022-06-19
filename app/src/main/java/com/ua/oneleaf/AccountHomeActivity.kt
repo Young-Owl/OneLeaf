@@ -77,7 +77,7 @@ class AccountHomeActivity : AppCompatActivity() {
 
     private fun showData() {
         val intent = Intent(
-            this, DataActivity::class.java
+            this, VaseSelect::class.java
         )
         startActivity(intent)
     }

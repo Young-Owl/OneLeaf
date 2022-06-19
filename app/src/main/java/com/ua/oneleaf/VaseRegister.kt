@@ -2,28 +2,17 @@ package com.ua.oneleaf
 
 import android.app.ProgressDialog
 import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.util.Patterns
-import android.widget.Button
 import android.widget.Toast
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
-import kotlinx.android.synthetic.main.account_home.*
-import kotlinx.android.synthetic.main.user_registration.*
 import kotlinx.android.synthetic.main.vase_register.*
-import java.lang.Integer.parseInt
-import java.util.*
-import kotlin.collections.HashMap
 
 class VaseRegister : AppCompatActivity() {
 
@@ -71,7 +60,7 @@ class VaseRegister : AppCompatActivity() {
 
     private fun validateData() {
         vaseRVal = vase_name.text.toString().trim()
-        plantRVal = plant_name.text.toString().trim()
+        plantRVal = id_vase.text.toString().trim()
         //validate data
         if (TextUtils.isEmpty(vaseRVal)){
             //Invalid email format
@@ -79,7 +68,7 @@ class VaseRegister : AppCompatActivity() {
         }
         else if (TextUtils.isEmpty(plantRVal)){
             //Password isn't entered
-            plant_name.error = "Please enter the plant's name."
+            id_vase.error = "Please enter the vase's ID."
         }
         else{
             // Data is valid, continue SignUp
@@ -93,7 +82,7 @@ class VaseRegister : AppCompatActivity() {
         //create account
 
         vaseRVal = vase_name.text.toString().trim()
-        plantRVal = plant_name.text.toString().trim()
+        plantRVal = id_vase.text.toString().trim()
 
 
 

@@ -23,6 +23,7 @@ class ProfileUpdate : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth;
     private lateinit var storageReference: StorageReference
+    private lateinit var databaseReference: DatabaseReference
     private val ref = FirebaseAuth.getInstance()
     private var filePath: Uri? = null
     private lateinit var uid: String
