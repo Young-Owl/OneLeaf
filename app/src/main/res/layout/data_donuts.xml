@@ -313,21 +313,5 @@
         app:layout_constraintTop_toTopOf="@+id/imageView11"
         app:srcCompat="@drawable/ic_baseline_warning_24" />
 
-    <Button
-        android:id="@+id/graphButton"
-        android:layout_width="122dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="28dp"
-        android:backgroundTint="@color/green_altered"
-        android:fontFamily="sans-serif-light"
-        android:text="Graphs"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/humidity_percentage" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
