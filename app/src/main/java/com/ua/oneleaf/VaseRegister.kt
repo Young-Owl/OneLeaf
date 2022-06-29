@@ -33,6 +33,7 @@ class VaseRegister : AppCompatActivity() {
 
     private var vaseRVal = ""
     private var plantRVal = ""
+    private var humidityRVal = ""
 
     //ProgressDialog
     private lateinit var progressDialog: ProgressDialog
@@ -83,14 +84,17 @@ class VaseRegister : AppCompatActivity() {
 
         vaseRVal = vase_name.text.toString().trim()
         plantRVal = id_vase.text.toString().trim()
+        humidityRVal = humidity_default.text.toString().trim()
 
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
-
+        if (humidityRVal == ""){
+            humidityRVal = "70"
+        }
         vaseNumber = (vaseNumber.toInt() + 1).toString()
-        vase = Vase(vaseRVal,plantRVal)
+        vase = Vase(vaseRVal,plantRVal,humidityRVal)
 
         user = User(usern,emailu,vaseNumber)
         databaseReference = FirebaseDatabase.getInstance().getReference("Users/$uid/Data")

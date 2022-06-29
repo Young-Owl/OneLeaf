@@ -209,7 +209,7 @@ class DataActivity : AppCompatActivity() {
 
     private fun setupDonut() {
         //Setup Light Donut
-        donutLight.cap = 100F
+        donutLight.cap = 5000F
 
         //Setup Water Donut
         donutWater.cap = 100F
@@ -221,11 +221,11 @@ class DataActivity : AppCompatActivity() {
         donutTemperature.cap = 100F
     }
     private fun setupLightDonut(progress :Float){
-        lightColor = getColor(progress)
-        lightSection = DonutSection("section_light", lightColor, progress)
+        lightColor = getColorLight(progress)
+        lightSection = DonutSection("section_light", lightColor, 5000F)
         donutLight.submitData(listOf(lightSection))
         @SuppressLint("SetTextI18n")
-        lightText.text = "$progress%"
+        lightText.text = "$progress Lm"
     }
     private fun setupWaterDonut(progress :Float){
         waterColor = getColor(progress)
@@ -274,6 +274,17 @@ class DataActivity : AppCompatActivity() {
         val b = 0.8F                 // Brightness
         return Color.HSVToColor(floatArrayOf(h, s, b))
     }
+
+    private fun getColorLight(power: Float): Int {
+        var h = (power/1750F) * 110F  // Hue (In Degrees! 110º = Max number possible, which means Green)
+        if(power >= 1750F) {
+            h = 110F
+        }
+        val s = 0.9F                 // Saturation
+        val b = 0.8F                 // Brightness
+        return Color.HSVToColor(floatArrayOf(h, s, b))
+    }
+
     private fun getColorTemp(power: Float): Int {
         var h = 0F
         if(power <= 20F) {
